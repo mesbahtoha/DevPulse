@@ -1,106 +1,81 @@
 # DevPulse API
 
-A professional backend API for reporting and managing software issues and feature requests.
+A modular backend API for managing software issues and feature requests using Node.js, Express.js, TypeScript, PostgreSQL, JWT Authentication, and Raw SQL.
 
 ---
 
 # Live URL
 
-🔗 https://dev-pulse-tau-teal.vercel.app/
+https://dev-pulse-tau-teal.vercel.app/
 
 ---
 
 # Features
 
 - User Registration & Login
-- JWT Authentication
-- Role Based Authorization
-- Create Issue
-- Get All Issues
-- Get Single Issue
-- Update Issue
-- Delete Issue (Maintainer Only)
-- Contributor & Maintainer Permission System
-- Validation & Error Handling
-- PostgreSQL Database Integration
-- Raw SQL Queries
+- JWT Authentication & Authorization
+- Role-based Access Control
+- Create, Update & Delete Issues
+- Issue Filtering & Sorting
+- Contributor & Maintainer Permissions
+- Global Error Handling
+- Raw SQL with PostgreSQL
 - TypeScript Strict Mode
-- Professional Modular Architecture
+- Vercel Deployment Ready
 
 ---
 
 # Tech Stack
 
-| Technology | Usage |
-|---|---|
-| Node.js | Backend Runtime |
-| Express.js | Server Framework |
-| TypeScript | Type Safety |
-| PostgreSQL | Database |
-| JWT | Authentication |
-| bcrypt | Password Hashing |
-| Raw SQL | Database Query |
-| Vercel | Deployment |
+- Node.js
+- Express.js
+- TypeScript
+- PostgreSQL
+- pg
+- bcrypt
+- jsonwebtoken
+- Vercel
+- NeonDB
 
 ---
 
 # Setup Instructions
 
-## 1. Clone Repository
+## Clone Repository
 
 ```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/devpulse.git
+git clone https://github.com/your-username/devpulse.git
 ```
 
----
-
-## 2. Move Into Project Directory
-
-```bash
-cd devpulse
-```
-
----
-
-## 3. Install Dependencies
+## Install Dependencies
 
 ```bash
 npm install
 ```
 
----
-
-## 4. Create Environment Variables
-
-Create a `.env` file in the root directory.
+## Create .env File
 
 ```env
 PORT=5000
 
-DATABASE_URL=YOUR_DATABASE_URL
+DATABASE_URL=your_database_url
 
-JWT_SECRET=devpulse_secret_key
+JWT_SECRET=your_secret_key
 ```
 
----
-
-## 5. Run Development Server
+## Run Development Server
 
 ```bash
 npm run dev
 ```
 
----
-
-## 6. Build Project
+## Build Project
 
 ```bash
 npm run build
 ```
 
----
-
-## 7. Start Production Server
+## Run Production Server
 
 ```bash
 npm start
@@ -108,26 +83,48 @@ npm start
 
 ---
 
-# API Endpoint List
+# API Endpoints
 
-## Authentication Routes
+## Authentication
 
-| Method | Endpoint | Description |
-|---|---|---|
-| POST | `/api/auth/signup` | Register New User |
-| POST | `/api/auth/login` | Login User |
+| Method | Endpoint |
+|---|---|
+| POST | /api/auth/signup |
+| POST | /api/auth/login |
 
 ---
 
-## Issue Routes
+## Issues
 
-| Method | Endpoint | Description |
+| Method | Endpoint |
+|---|---|
+| POST | /api/issues |
+| GET | /api/issues |
+| GET | /api/issues/:id |
+| PATCH | /api/issues/:id |
+| DELETE | /api/issues/:id |
+
+---
+
+# Query Parameters
+
+## Get All Issues
+
+```http
+GET /api/issues?sort=newest
+```
+
+| Parameter | Values | Default |
 |---|---|---|
-| POST | `/api/issues` | Create Issue |
-| GET | `/api/issues` | Get All Issues |
-| GET | `/api/issues/:id` | Get Single Issue |
-| PATCH | `/api/issues/:id` | Update Issue |
-| DELETE | `/api/issues/:id` | Delete Issue |
+| sort | newest, oldest | newest |
+| type | bug, feature_request | none |
+| status | open, in_progress, resolved | none |
+
+### Example
+
+```http
+GET /api/issues?sort=newest&type=bug&status=open
+```
 
 ---
 
@@ -137,11 +134,11 @@ npm start
 
 | Column | Type |
 |---|---|
-| id | SERIAL |
+| id | SERIAL PRIMARY KEY |
 | name | VARCHAR(100) |
-| email | VARCHAR(150) |
+| email | VARCHAR(150) UNIQUE |
 | password | TEXT |
-| role | VARCHAR(20) |
+| role | contributor / maintainer |
 | created_at | TIMESTAMP |
 | updated_at | TIMESTAMP |
 
@@ -151,105 +148,17 @@ npm start
 
 | Column | Type |
 |---|---|
-| id | SERIAL |
+| id | SERIAL PRIMARY KEY |
 | title | VARCHAR(150) |
 | description | TEXT |
-| type | VARCHAR(30) |
-| status | VARCHAR(30) |
+| type | bug / feature_request |
+| status | open / in_progress / resolved |
 | reporter_id | INTEGER |
 | created_at | TIMESTAMP |
 | updated_at | TIMESTAMP |
 
 ---
 
-# Project Structure
-
-```txt
-devpulse/
-│
-├── src/
-│   ├── app.ts
-│   ├── server.ts
-│   │
-│   ├── config/
-│   │   ├── db.ts
-│   │   └── env.ts
-│   │
-│   ├── interfaces/
-│   │   └── index.ts
-│   │
-│   ├── middleware/
-│   │   ├── auth.ts
-│   │   ├── checkRole.ts
-│   │   ├── globalErrorHandler.ts
-│   │   └── notFound.ts
-│   │
-│   ├── modules/
-│   │   ├── auth/
-│   │   └── issues/
-│   │
-│   ├── types/
-│   │   └── express/
-│   │
-│   └── utils/
-│
-├── .env
-├── .gitignore
-├── package.json
-├── tsconfig.json
-├── vercel.json
-├── README.md
-│
-└── dist/
-```
-
----
-
-# Authorization Rules
-
-## Contributor Can
-
-- Create issue
-- View issue
-- Update own issue
-- Update only when status is `open`
-
----
-
-## Contributor Cannot
-
-- Delete issue
-- Change issue status
-- Update other users' issues
-
----
-
-## Maintainer Can
-
-- Update any issue
-- Delete any issue
-- Change issue status
-
----
-
-# Error Handling
-
-Project includes:
-
-- Global Error Handler
-- Invalid Route Handler
-- Validation Errors
-- Unauthorized Errors
-- Forbidden Errors
-
----
-
-# Deployment
-
-Project deployed on Vercel.
-
----
-
 # Author
 
-## Md. Mesbahul Alam
+Md. Mesbahul Alam
