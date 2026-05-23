@@ -39,6 +39,62 @@ https://dev-pulse-tau-teal.vercel.app/
 
 ---
 
+# Project Structure
+
+```txt
+devpulse/
+│
+├── src/
+│   ├── app.ts
+│   ├── server.ts
+│   │
+│   ├── config/
+│   │   ├── db.ts
+│   │   └── env.ts
+│   │
+│   ├── interfaces/
+│   │   └── index.ts
+│   │
+│   ├── middleware/
+│   │   ├── auth.ts
+│   │   ├── checkRole.ts
+│   │   ├── globalErrorHandler.ts
+│   │   └── notFound.ts
+│   │
+│   ├── modules/
+│   │   ├── auth/
+│   │   │   ├── auth.controller.ts
+│   │   │   ├── auth.route.ts
+│   │   │   ├── auth.service.ts
+│   │   │   └── auth.validation.ts
+│   │   │
+│   │   └── issues/
+│   │       ├── issue.controller.ts
+│   │       ├── issue.route.ts
+│   │       ├── issue.service.ts
+│   │       └── issue.validation.ts
+│   │
+│   ├── utils/
+│   │   ├── catchAsync.ts
+│   │   ├── sendResponse.ts
+│   │   └── verifyToken.ts
+│   │
+│   └── types/
+│       └── express/
+│           └── index.d.ts
+│
+├── .env
+├── .gitignore
+├── package.json
+├── tsconfig.json
+├── vercel.json
+├── README.md
+│
+└── dist/
+```
+
+---
+
 # Setup Instructions
 
 ## Clone Repository
