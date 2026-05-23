@@ -111,3 +111,8 @@ devpulse/
 ├── README.md
 │
 └── dist/
+
+---
+
+## 🚀 Author
+Md. Mesbahul Alam
