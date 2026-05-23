@@ -2,45 +2,30 @@
 
 A professional backend API for reporting and managing software issues and feature requests.
 
-Built with:
-
-- Node.js
-- Express.js
-- TypeScript
-- PostgreSQL
-- JWT Authentication
-- Raw SQL
-- Role Based Authorization
-
 ---
 
-# Live API
+# Live URL
 
 🔗 https://dev-pulse-tau-teal.vercel.app/
 
 ---
 
-# Project Overview
+# Features
 
-DevPulse is an issue tracking backend system where users can:
-
-- Register and login
-- Create software issues
-- View all issues
-- View single issue details
-- Update issues
-- Delete issues (Maintainer only)
-
-The system also supports:
-
+- User Registration & Login
 - JWT Authentication
-- Role based authorization
-- Contributor & Maintainer permissions
-- Validation
-- Error handling
-- PostgreSQL database
-- Raw SQL queries
-- TypeScript strict mode
+- Role Based Authorization
+- Create Issue
+- Get All Issues
+- Get Single Issue
+- Update Issue
+- Delete Issue (Maintainer Only)
+- Contributor & Maintainer Permission System
+- Validation & Error Handling
+- PostgreSQL Database Integration
+- Raw SQL Queries
+- TypeScript Strict Mode
+- Professional Modular Architecture
 
 ---
 
@@ -56,6 +41,124 @@ The system also supports:
 | bcrypt | Password Hashing |
 | Raw SQL | Database Query |
 | Vercel | Deployment |
+
+---
+
+# Setup Instructions
+
+## 1. Clone Repository
+
+```bash
+git clone https://github.com/YOUR_GITHUB_USERNAME/devpulse.git
+```
+
+---
+
+## 2. Move Into Project Directory
+
+```bash
+cd devpulse
+```
+
+---
+
+## 3. Install Dependencies
+
+```bash
+npm install
+```
+
+---
+
+## 4. Create Environment Variables
+
+Create a `.env` file in the root directory.
+
+```env
+PORT=5000
+
+DATABASE_URL=YOUR_DATABASE_URL
+
+JWT_SECRET=devpulse_secret_key
+```
+
+---
+
+## 5. Run Development Server
+
+```bash
+npm run dev
+```
+
+---
+
+## 6. Build Project
+
+```bash
+npm run build
+```
+
+---
+
+## 7. Start Production Server
+
+```bash
+npm start
+```
+
+---
+
+# API Endpoint List
+
+## Authentication Routes
+
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/auth/signup` | Register New User |
+| POST | `/api/auth/login` | Login User |
+
+---
+
+## Issue Routes
+
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/issues` | Create Issue |
+| GET | `/api/issues` | Get All Issues |
+| GET | `/api/issues/:id` | Get Single Issue |
+| PATCH | `/api/issues/:id` | Update Issue |
+| DELETE | `/api/issues/:id` | Delete Issue |
+
+---
+
+# Database Schema Summary
+
+## users Table
+
+| Column | Type |
+|---|---|
+| id | SERIAL |
+| name | VARCHAR(100) |
+| email | VARCHAR(150) |
+| password | TEXT |
+| role | VARCHAR(20) |
+| created_at | TIMESTAMP |
+| updated_at | TIMESTAMP |
+
+---
+
+## issues Table
+
+| Column | Type |
+|---|---|
+| id | SERIAL |
+| title | VARCHAR(150) |
+| description | TEXT |
+| type | VARCHAR(30) |
+| status | VARCHAR(30) |
+| reporter_id | INTEGER |
+| created_at | TIMESTAMP |
+| updated_at | TIMESTAMP |
 
 ---
 
@@ -83,25 +186,12 @@ devpulse/
 │   │
 │   ├── modules/
 │   │   ├── auth/
-│   │   │   ├── auth.controller.ts
-│   │   │   ├── auth.route.ts
-│   │   │   ├── auth.service.ts
-│   │   │   └── auth.validation.ts
-│   │   │
 │   │   └── issues/
-│   │       ├── issue.controller.ts
-│   │       ├── issue.route.ts
-│   │       ├── issue.service.ts
-│   │       └── issue.validation.ts
 │   │
 │   ├── types/
 │   │   └── express/
-│   │       └── index.d.ts
 │   │
 │   └── utils/
-│       ├── catchAsync.ts
-│       ├── sendResponse.ts
-│       └── verifyToken.ts
 │
 ├── .env
 ├── .gitignore
@@ -111,8 +201,55 @@ devpulse/
 ├── README.md
 │
 └── dist/
+```
 
 ---
 
-🚀 Author
-Md. Mesbahul Alam
+# Authorization Rules
+
+## Contributor Can
+
+- Create issue
+- View issue
+- Update own issue
+- Update only when status is `open`
+
+---
+
+## Contributor Cannot
+
+- Delete issue
+- Change issue status
+- Update other users' issues
+
+---
+
+## Maintainer Can
+
+- Update any issue
+- Delete any issue
+- Change issue status
+
+---
+
+# Error Handling
+
+Project includes:
+
+- Global Error Handler
+- Invalid Route Handler
+- Validation Errors
+- Unauthorized Errors
+- Forbidden Errors
+
+---
+
+# Deployment
+
+Project deployed on Vercel.
+
+---
+
+# Author
+
+## Md. Mesbahul Alam
