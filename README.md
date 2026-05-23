@@ -114,5 +114,5 @@ devpulse/
 
 ---
 
-# 🚀 Author
+🚀 Author
 Md. Mesbahul Alam
